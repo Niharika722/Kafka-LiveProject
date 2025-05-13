@@ -5,11 +5,9 @@ import (
 	"order-service/internal/config"
 	"order-service/internal/health"
 	"order-service/internal/kafka"
-	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 // func getPayloads(ctx *gin.Context) {
@@ -40,21 +38,6 @@ import (
 
 func main() {
 
-	// Load .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	// Use the environment variables
-	kafkaHome := os.Getenv("KAFKA_HOME")
-	broker := os.Getenv("BROKER_ADDRESS")
-	notificationTopic := os.Getenv("NOTIFICATION_TOPIC")
-
-	log.Println("Kafka Home:", kafkaHome)
-	log.Println("Broker:", broker)
-	log.Println("Notification Topic:", notificationTopic)
-	
 	router := gin.Default()
 
 	// Kafka broker address - ensure it's accessible
