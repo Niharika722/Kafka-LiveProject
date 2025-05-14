@@ -79,3 +79,15 @@ func StartNotificationConsumer(brokerAddress, notificationTopic, deadLetterQueue
 		log.Printf("Successfully processed notification for OrderID: %s", event.OrderID)
 	}
 }
+
+// cleanMessageValue removes any trailing control characters from the message
+func CleanMessageValue(value []byte) []byte {
+	// Find the last valid JSON character (closing brace)
+	len := len(value)
+	for i := len - 1; i >= 0; i-- {
+		if value[i] == '}' {
+			return value[:i+1]
+		}
+	}
+	return value
+}
